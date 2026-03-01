@@ -375,7 +375,12 @@ def analyze_diary(api_key, diary_text):
         payload = {
             "contents": [{
                 "parts": [{"text": prompt_text}]
-            }]
+            }],
+            "generationConfig": {
+                "temperature": 0.1,  # 0에 가까울수록 AI가 매번 같은 기준으로 엄격하게 채점합니다.
+                "topP": 0.8,
+                "maxOutputTokens": 2048
+            }     
         }
         
         try:
@@ -1451,4 +1456,5 @@ with tab2:
             st.markdown(st.session_state[insight_key])
         else:
             st.info("버튼을 눌러 AI 심층 회고 리포트를 생성해 보세요. (한 달 치의 일기와 CBT 기록을 종합 분석합니다.)")
+
 
